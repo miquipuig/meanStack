@@ -1,5 +1,7 @@
 var mongoose = require( 'mongoose' );
+require('./locations');
 var dbURI = 'mongodb://localhost/Loc8r';
+
 
 if (process.env.NODE_ENV === 'production') {
     //dbURI = 'mongodb://nasgros:turboc@ds015780.mlab.com:15780/nasgros';
