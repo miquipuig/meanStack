@@ -98,11 +98,14 @@ module.exports.locationsUpdateOne = function(req, res) {
                     closed: req.body.closed2,
                 }];
                 location.save(function(err, location) {
+                    var thisReview;
                     if (err) {
-                        sendJsonResponse(res, 404, err);
+                       
+                        sendJsonResponse(res, 400, err);
                     }
                     else {
-                        sendJsonResponse(res, 200, location);
+                       
+                        sendJSONresponse(res, 201, location);
                     }
                 });
             }

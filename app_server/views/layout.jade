@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='loc8rApp')
   head
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title= title
@@ -19,14 +19,29 @@ html
             li
               a(href='/about/') About
    
-    .container  
+    .container 
+      div(ng-view)
       block content
       footer
         .row
           .col-xs-12
             small &copy; Simon Holmes 2014
     
-    
-    script(src='/javascripts/jquery-1.11.1.min.js')
+    script(src='/javascripts/jquery-2.2.3.min.js')   
     script(src='/bootstrap/js/bootstrap.min.js')
+
+    script(src='/javascripts/validation.js')
+    script(src='/bower_components/angular/angular.min.js')
+    script(src='/bower_components/angular-route/angular-route.min.js')
+    //script(src='/loc8rApp.js')
+   
+    script(src='/angular/loc8r.min.js')
+    //script(src='/app.js')
+    //script(src='/home/home.controller.js')
+    //script(src='/common/services/loc8rData.service.js')
+    //script(src='/common/services/geolocation.service.js')
+    //script(src='/common/filters/formatDistance.filter.js')
+    //script(src='/common/directives/ratingStars/ratingStars.directive.js')
+   
+    
  

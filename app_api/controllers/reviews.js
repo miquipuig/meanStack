@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
 
 module.exports.reviewsCreate = function(req, res) {
-
+    console.log("Passo por aqui2");
    var locationid = req.params.locationid;
    if (locationid) {
       Loc
@@ -11,9 +11,12 @@ module.exports.reviewsCreate = function(req, res) {
          .exec(
             function(err, location) {
                if (err) {
+                  
                   sendJsonResponse(res, 400, err);
+                 
                }
                else {
+                  
                   doAddReview(req, res, location);
                }
             });
@@ -154,6 +157,8 @@ var doAddReview = function(req, res, location) {
       location.save(function(err, location) {
          var thisReview;
          if (err) {
+            console.log(err);
+            console.log("res: "+res)
             sendJsonResponse(res, 400, err);
          }
          else {
