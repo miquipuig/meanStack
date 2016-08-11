@@ -137,13 +137,15 @@ module.exports.locationsDeleteOne = function(req, res) {
 module.exports.locationsListByDistance = function(req, res) {
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
+    var distance = parseFloat(req.query.maxDistance*1000);
     var point = {
         type: "Point",
         coordinates: [lng, lat]
     };
     var geoOptions = {
         spherical: true,
-        maxDistance: theEarth.getRadsFromDistance(req.query.maxDistance),
+        //maxDistance: theEarth.getRadsFromDistance(req.query.maxDistance),
+        maxDistance: distance,
         num: 10
     };
     if (!lng || !lat) {
@@ -155,9 +157,12 @@ module.exports.locationsListByDistance = function(req, res) {
     Loc.geoNear(point, geoOptions, function(err, results, stats) {
 
         var locations = [];
+        //distance: theEarth.getDistanceFromRads(doc.dis),
+
         results.forEach(function(doc) {
             locations.push({
-                distance: theEarth.getDistanceFromRads(doc.dis),
+                distance: parseFloat(doc.dis/1000),
+                //distance: theEarth.getDistanceFromRads(doc.dis),
                 name: doc.obj.name,
                 address: doc.obj.address,
                 rating: doc.obj.rating,
