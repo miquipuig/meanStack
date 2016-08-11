@@ -42,7 +42,7 @@ var appClientFiles = [
   'app_client/common/directives/navigation/navigation.directive.js',
   'app_client/common/directives/pageHeader/pageHeader.directive.js',
   'app_client/reviewModal/reviewModal.controller.js',
-  
+
 ];
 
 var uglified = uglifyJs.minify(appClientFiles, {
@@ -80,6 +80,8 @@ app.use(function(req, res) {
 
 
 
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -88,6 +90,16 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+// Catch unauthorsed errors
+app.use(function(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({
+      "message": err.name + ": " + err.message
+    });
+  }
+});
+
 
 // development error handler
 // will print stacktrace
@@ -110,6 +122,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;
