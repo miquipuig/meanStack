@@ -1,5 +1,5 @@
 (function() {
-    angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap' ]);
+    angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
     function config($routeProvider, $locationProvider) {
         $routeProvider
@@ -18,9 +18,19 @@
                 controller: 'locationDetailCtrl',
                 controllerAs: 'vm'
             })
-            .otherwise({
-                redirectTo: '/'
-            });
+            .when('/register', {
+                templateUrl: '/register/register.view.html',
+                controller: 'registerCtrl',
+                controllerAs: 'vm'
+            })
+            .when('/login', {
+                templateUrl: '/login/login.view.html',
+                controller: 'loginCtrl',
+                controllerAs: 'vm'
+            })
+        .otherwise({
+            redirectTo: '/'
+        });
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
